@@ -12,7 +12,6 @@
     <artifactId>product-persistence</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>product-persistence</name>
-    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>16</java.version>
     </properties>
