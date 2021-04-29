@@ -47,9 +47,51 @@ following reasons:
 
 ### Database
 
-As we have very little information on how this service will be used this decision is the hardest to
-make. As we can not make an informed decision, by the requirements alone, I decided to go with SQL,
-as I've been told most of the databases already in use are SQL DBs.
+The data model is certainly a challenge with this problem. At first glance it seems simple:
 
+![img](documentation/product_data_model.png)
 
+There is a challenge though: The recursive relationship between categories.
 
+Here are my thoughts in order how to solve this problem:
+
+1. Graph Database
+
+This type of hierarchy screams tree structure to me. Graph databases are designed to deal with
+datasets like these.
+
+| Pros  | Cons |
+| ------------- | ------------- |
+| Fast  | I do not know much about graph databases  |
+| Intuitive  |   |
+
+2. Flat Table
+
+Thinking about the usage patterns I thought about dropping the categories table all together and
+representing the categories as a key (e.g. /clothes/winter/men) similar to how S3 manages its data.
+An index on this key would make queries by category really fast.
+
+| Pros  | Cons |
+| ------------- | ------------- |
+| Simple  | Does not really work well, if products have to be in multiple categories |
+| Fast queries on products | Queries on the category tree may be slow. This should not be a big problem though, because I would consider this data fairly static and the results can be cached. |
+
+3. Tree in NoSql
+
+Modeling a tree in a NoSql Db, with double references to childs and parents. The categories would
+have a list of products in them, to be able to query easily by category. The products themselves
+would have a reference to their categories in them.
+
+| Pros  | Cons |
+| ------------- | ------------- |
+| Fast queries on both categories and products | Data Redundancy |
+| Easy to adjust the model due to no schema | Complicated to keep the double references in sync |
+
+=> Solution:
+
+I will go with option 1 for the following reasons:
+
+- That I do not much about it. I want to take this opportunity to learn more about it.
+- I believe this should be the "correct" solution for this problem.
+
+If I run into problems with this approach due to time trouble, I will revert back to option 3.
