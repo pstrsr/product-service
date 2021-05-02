@@ -28,7 +28,6 @@ public class CategoryDao implements LoadCategory, WriteCategory {
     return categoryMapper.toDomain(categoryNode);
   }
 
-
   @Override
   public Set<Category> byIds(List<Long> ids) {
     // We want to check each id individually, if it really exists.

@@ -18,9 +18,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,8 +37,8 @@ class ProductDaoTest {
   @Autowired private TestRepository testRepository;
 
   @BeforeEach
-  public void setup() throws IOException {
-    // creates same testset as Liquibase migration
+  public void setup()  {
+    // creates same test set as Liquibase migration
     testRepository.createTestData1();
     testRepository.createTestData2();
     testRepository.createTestData3();
@@ -48,7 +47,7 @@ class ProductDaoTest {
   }
 
   @AfterEach
-  public void deleteAll() throws IOException, InterruptedException {
+  public void deleteAll() throws InterruptedException {
     testRepository.deleteAllNodes();
     Thread.sleep(2000); // ugly, but tests do not work without this!
   }
@@ -61,7 +60,7 @@ class ProductDaoTest {
             "Pepper",
             "very warm",
             new Money(BigDecimal.ONE, "EUR"),
-            new HashSet<>(Arrays.asList(category)));
+            new HashSet<>(Collections.singletonList(category)));
     productDao.upsert(product);
 
     Set<ProductNode> all = productRepository.findAll();
@@ -91,7 +90,7 @@ class ProductDaoTest {
 
   @Test
   public void should_NotExistByName() {
-    assertFalse(productDao.existsByName("Wasserrutsche"));
+    assertFalse(productDao.existsByName("Water slide"));
   }
 
   @Test

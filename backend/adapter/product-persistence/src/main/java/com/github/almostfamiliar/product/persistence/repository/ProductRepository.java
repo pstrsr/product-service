@@ -1,6 +1,5 @@
 package com.github.almostfamiliar.product.persistence.repository;
 
-import com.github.almostfamiliar.product.persistence.node.CategoryNode;
 import com.github.almostfamiliar.product.persistence.node.ProductNode;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;

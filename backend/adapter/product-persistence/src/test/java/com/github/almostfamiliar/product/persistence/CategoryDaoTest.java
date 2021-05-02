@@ -58,7 +58,6 @@ public class CategoryDaoTest {
     assertEquals(10, categoryRepository.findAll().size());
   }
 
-
   @Test
   public void should_ThrowDoesNotExistError_When_ProvidingWrongId() {
     assertThrows(CategoryDoesNotExistExc.class, () -> categoryDao.byId(-1L));

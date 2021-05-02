@@ -45,7 +45,6 @@ class CategoryServiceTest {
     sut.createCategory(createCategoryCmd);
 
     verify(writeCategory, times(1)).upsert(any());
-
   }
 
   @Test
