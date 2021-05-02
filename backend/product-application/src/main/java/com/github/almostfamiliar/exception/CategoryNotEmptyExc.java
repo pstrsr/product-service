@@ -1,7 +1,8 @@
 package com.github.almostfamiliar.exception;
 
-public class CategoryNotEmptyExc extends BusinessException {
+public class CategoryNotEmptyExc extends ApplicationException {
   public CategoryNotEmptyExc() {
-    super("Category has to be empty to be able to be deleted!");
+    super(
+        "There are still products or subcategories pointing at this category.Category has to be empty to be able to be deleted! ");
   }
 }

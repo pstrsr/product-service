@@ -1,15 +1,22 @@
 package com.github.almostfamiliar.port.in;
 
 import com.github.almostfamiliar.domain.Category;
+import com.github.almostfamiliar.port.command.CreateCategoryCmd;
+import com.github.almostfamiliar.port.command.UpdateCategoryCmd;
 
-import java.math.BigInteger;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 public interface CategoryCRUD {
-  void createCategory(Category category);
+  void createCategory(@Valid CreateCategoryCmd category);
 
-  Category getCategory(BigInteger id, String currency);
+  Category getCategory(@NotNull @Min(0) Long id); // TODO check if validation works
 
-  void updateCategory(Category category);
+  Set<Category> getAllCategories();
 
-  void deleteCategory(BigInteger id);
+  void updateCategory(@Valid UpdateCategoryCmd toCmd);
+
+  void deleteCategory(@NotNull @Min(0) Long id);
 }

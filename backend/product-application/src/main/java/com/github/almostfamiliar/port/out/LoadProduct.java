@@ -2,11 +2,14 @@ package com.github.almostfamiliar.port.out;
 
 import com.github.almostfamiliar.domain.Product;
 
-import java.math.BigInteger;
-import java.util.List;
+import java.util.Set;
 
 public interface LoadProduct {
-  Product byId(BigInteger id);
+  Product byId(Long id);
 
-  List<Product> byCategory(BigInteger categoryId);
+  Set<Product> byCategory(Long categoryId);
+
+  boolean existsByName(String name);
+
+  boolean existsOtherByName(Long id, String name);
 }

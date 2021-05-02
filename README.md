@@ -2,11 +2,83 @@
 
 CRUD-API to manage products in categories
 
+## How to run
+
+### Prerequisites
+
+- Maven
+- Java 16
+- Docker/docker-compose or neo4j database
+
+### Build & Run
+
+Build and generate auto generated classes:
+
+```
+cd backend
+mvn clean install
+```
+
+Make sure you set your fixer api key as environment variable with the name of FIXER_API_KEY. In
+IntelliJ one would do that in the run configurations here:
+
+![img](documentation/fixer_config.png)
+
+To start the database run:
+
+```
+docker-compose -f neo4j-docker-compose.yml up
+```
+
+There is no volume configured, so all data will be lost.
+
+Run the Spring Application from the main class in
+
+```
+backend/product-main/src/main/java/com/github/almostfamiliar/ConfigApplication.java
+```
+
+### How to use the app
+
+The api is documented by swagger at:
+
+```
+http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
+```
+
+The database can be inspected at:
+
+```
+http://localhost:7474/
+```
+
+A Postman collection with some examples is available in:
+
+```
+/documents/product-service.postman_collection.json
+```
+
 ## Concept Phase
+
+### Defining the Rules
+
+The challenge is to write a service which allows managing products in categories.
+
+I decided on the following requirements:
+
+- Each category can have unlimited sub categories.
+- The immediate subcategory can not have the same name as any other immediate subcategory.
+- None of the parents of a subcategory can have the same name as the subcategory.
+- Product names have to be unique in the system
+- Categories can only be deleted, if they are empty (no products, no subcategory)
+- Products can belong to multiple categories
 
 ### Frontend
 
-The frontend will be a single page application implemented in react, as required by the exercise.
+The frontend will be a single page application implemented in react, as required by the exercise. As
+I have no knowledge of react at allI will struggle with producing high quality software in this
+part. Knowing this I will allocate a significant amount of time into this part to learn the basics (
+probably sunday), but I will focus my efforts on the backend in terms of quality of the software.
 
 ### Backend
 
@@ -21,7 +93,8 @@ On the one hand the use case seems fairly simple at first glance, which would sp
 layered architecture with minimal constraints for simplicity.
 
 On the other hand the feature to convert currencies and already foreseeable changes to the API,
-speak for the fact that this service will evolve into a more complex service.
+speak for the fact that this service will evolve into a more complex service. Managing the hierarchy
+of categories will require a decent amount of logic as well.
 
 #### Conclusion
 
@@ -41,6 +114,9 @@ following reasons:
   tech of graph databases, which require a refactor to a different type of persistence. To avoid
   database-driven-design, we need dependency inversion for this use case.
 
+- "Product-Service" sounds like something that would evolve to something bigger over time, but that
+  may just be me.
+
 - As this is a demo project to showcase how I would model most services, I would like to show how I
   would like to model a slightly more complicated setup, which takes extensibility maybe more into
   account than I usually would.
@@ -57,8 +133,8 @@ Here are my thoughts in order how to solve this problem:
 
 1. Graph Database
 
-This type of hierarchy screams tree structure to me. Graph databases are designed to deal with
-datasets like these.
+The type of hierarchy screams tree structure to me. Graph databases immediately come to mind as they
+are designed to deal with datasets like these.
 
 | Pros  | Cons |
 | ------------- | ------------- |
@@ -95,3 +171,21 @@ I will go with option 1 for the following reasons:
 - I believe this should be the "correct" solution for this problem.
 
 If I run into problems with this approach due to time trouble, I will revert back to option 3.
+
+### Additional thoughts
+
+The calls to the category data can mostly be cached, as this data should rarely change. To make this
+service scalable the caching mechanism would need to be extracted to a memory db, which is pretty
+fast to set up.
+
+Caching is also used to validate the currencies against the fixer api, to reduce costs.
+
+### Tools and Libs used
+
+- Mapstruct
+- ArchUnit
+- Liquigraph
+- Lombok
+- Neo4j
+- Swagger
+- Feign

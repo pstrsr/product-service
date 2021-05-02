@@ -1,29 +1,54 @@
 package com.github.almostfamiliar.domain;
 
+import com.github.almostfamiliar.exception.CategoryAlreadyContainsSameSubcategoryExc;
 import lombok.Getter;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 public class Category {
-  @Getter private BigInteger id;
+  @Getter private final Long id;
   @Getter private String name;
-  @Getter private Category parent;
-  @Getter private List<Category> childs;
+  @Getter private final Set<Category> children;
 
-  private Category(BigInteger id, String name, Category parent, List<Category> childs) {
+  private Category(Long id, String name, Set<Category> children) {
     this.id = id;
     this.name = name;
-    this.parent = parent;
-    this.childs = childs;
+    this.children = children;
   }
 
-  public static Category createNew(String name, Category parent) {
-    return new Category(null, name, parent, new ArrayList<>());
+  public static Category createNew(String name) {
+    return new Category(null, name, new HashSet<>());
   }
 
-  public static Category load(BigInteger id, String name, Category parent, List<Category> childs) {
-    return new Category(id, name, parent, childs);
+  public static Category createExisting(Long id, String name, Set<Category> children) {
+    return new Category(id, name, children);
+  }
+
+  public void addChild(Category newChild) {
+    checkChildrenAlreadyContainName(newChild);
+
+    this.children.add(newChild);
+  }
+
+  public void changeName(String name) {
+    this.name = name;
+  }
+
+  public void removeChild(Category oldChild) {
+    final Optional<Category> oldNode =
+        this.children.stream().filter(child -> child.getId().equals(oldChild.getId())).findAny();
+
+    oldNode.ifPresent(this.children::remove);
+  }
+
+  private void checkChildrenAlreadyContainName(Category newChild) {
+    boolean alreadyContainsName =
+        this.children.stream()
+            .anyMatch(child -> child.getName().equalsIgnoreCase(newChild.getName()));
+    if (alreadyContainsName) {
+      throw new CategoryAlreadyContainsSameSubcategoryExc(this, newChild);
+    }
   }
 }

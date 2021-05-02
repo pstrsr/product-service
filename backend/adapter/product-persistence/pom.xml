@@ -16,15 +16,36 @@
         <java.version>16</java.version>
     </properties>
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-data-neo4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.almostfamiliar</groupId>
+            <artifactId>product-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquigraph</groupId>
+            <artifactId>liquigraph-spring-boot-starter</artifactId>
+            <version>${liquigraph-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-jdbc-bolt</artifactId>
+            <!--<artifactId>neo4j-jdbc-http</artifactId>-->
+            <version>${neo4j-jdbc-bolt.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
