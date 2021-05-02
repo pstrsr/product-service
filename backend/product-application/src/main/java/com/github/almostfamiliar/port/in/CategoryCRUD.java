@@ -12,7 +12,7 @@ import java.util.Set;
 public interface CategoryCRUD {
   void createCategory(@Valid CreateCategoryCmd category);
 
-  Category getCategory(@NotNull @Min(0) Long id); // TODO check if validation works
+  Category getCategory(@NotNull @Min(0) Long id);
 
   Set<Category> getAllCategories();
 
