@@ -18,7 +18,7 @@ public interface CategoryPersistenceMapper {
             .map(children -> children.stream().map(this::toDomain).collect(Collectors.toSet()))
             .orElse(new HashSet<>());
 
-    return Category.createExisting(categoryNode.getId(), categoryNode.getName(), childCategories);
+    return Category.loadExisting(categoryNode.getId(), categoryNode.getName(), childCategories);
   }
 
   Set<Category> toDomain(Set<CategoryNode> categoryNode);

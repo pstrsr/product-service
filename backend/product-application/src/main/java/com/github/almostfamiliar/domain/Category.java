@@ -1,12 +1,16 @@
 package com.github.almostfamiliar.domain;
 
-import com.github.almostfamiliar.exception.CategoryAlreadyContainsSameSubcategoryExc;
+import com.github.almostfamiliar.exception.CategoryAlreadyContainsSubcategoryExc;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@EqualsAndHashCode
+@ToString
 public class Category {
   @Getter private final Long id;
   @Getter private String name;
@@ -22,7 +26,7 @@ public class Category {
     return new Category(null, name, new HashSet<>());
   }
 
-  public static Category createExisting(Long id, String name, Set<Category> children) {
+  public static Category loadExisting(Long id, String name, Set<Category> children) {
     return new Category(id, name, children);
   }
 
@@ -48,7 +52,7 @@ public class Category {
         this.children.stream()
             .anyMatch(child -> child.getName().equalsIgnoreCase(newChild.getName()));
     if (alreadyContainsName) {
-      throw new CategoryAlreadyContainsSameSubcategoryExc(this, newChild);
+      throw new CategoryAlreadyContainsSubcategoryExc(this, newChild);
     }
   }
 }

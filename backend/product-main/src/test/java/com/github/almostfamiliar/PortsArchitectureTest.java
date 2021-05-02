@@ -20,10 +20,6 @@ public class PortsArchitectureTest {
           .haveSimpleNameEndingWith("CRUD");
 
   @ArchTest
-  static final ArchRule should_EndWithPort_When_IsOutPort =
-      classes().that().resideInAPackage("..out").should().haveSimpleNameEndingWith("Port");
-
-  @ArchTest
   static final ArchRule should_EndWithCommand_When_IsCommandModel =
       classes().that().resideInAPackage("..command").should().haveSimpleNameEndingWith("Cmd");
 }

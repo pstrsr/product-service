@@ -1,7 +1,6 @@
 package com.github.almostfamiliar.product.persistence.repository;
 
 import com.github.almostfamiliar.product.persistence.node.CategoryNode;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -53,7 +52,7 @@ public interface CategoryRepository extends CrudRepository<CategoryNode, Long> {
          """)
   Optional<CategoryNode> findParent(@Param("id") Long id);
 
-  @NotNull Set<CategoryNode> findAll();
+  Set<CategoryNode> findAll();
 
   @Query("""
          MATCH (c:Category)

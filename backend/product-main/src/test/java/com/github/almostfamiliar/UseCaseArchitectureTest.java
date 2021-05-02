@@ -14,7 +14,8 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 public class UseCaseArchitectureTest {
 
   static final DescribedPredicate<JavaClass> portInterface =
-      JavaClass.Predicates.simpleNameEndingWith("UseCase");
+      JavaClass.Predicates.simpleNameEndingWith("UseCase")
+          .or(JavaClass.Predicates.simpleNameEndingWith("CRUD"));
 
   @ArchTest
   static final ArchRule should_BePackageVisibility_When_IsUsecase =

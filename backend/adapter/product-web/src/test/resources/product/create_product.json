@@ -1,0 +1,9 @@
+{
+  "name": "Onesie",
+  "description": "Big bear onesie. Super warm!",
+  "price": 1.99,
+  "currency": "USD",
+  "categories": [
+    8
+  ]
+}

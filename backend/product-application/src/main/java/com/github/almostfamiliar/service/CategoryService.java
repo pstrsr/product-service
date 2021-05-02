@@ -21,7 +21,7 @@ import java.util.Set;
 @Transactional
 @Validated
 @RequiredArgsConstructor
-public class CategoryService implements CategoryCRUD {
+class CategoryService implements CategoryCRUD {
   private final LoadCategory loadCategory;
   private final WriteCategory writeCategory;
 
@@ -73,7 +73,7 @@ public class CategoryService implements CategoryCRUD {
   }
 
   private void updateSubCategory(Category category, Long parentId) {
-    if (loadCategory.doesParentCategoryExist(parentId, category.getName())) {
+    if (loadCategory.doesParentCategoryWithSameNameExist(parentId, category.getName())) {
       throw new SubCategorySameNameAsParentExc(category.getName());
     }
 
@@ -86,7 +86,7 @@ public class CategoryService implements CategoryCRUD {
   }
 
   private void removeCategoryFromOldParentIfExists(Category category) {
-    final Optional<Category> oldParent = loadCategory.getParent(category.getId());
+    final Optional<Category> oldParent = loadCategory.findParent(category.getId());
     oldParent.ifPresent(
         oldParentCategory -> {
           oldParentCategory.removeChild(category);
@@ -95,7 +95,7 @@ public class CategoryService implements CategoryCRUD {
   }
 
   private void createRootCategory(Category newRootCategory) {
-    if (loadCategory.doesRootCategoryExist(newRootCategory.getName())) {
+    if (loadCategory.doesRootCategoryExistWithName(newRootCategory.getName())) {
       throw new RootCategoryAlreadyExistsExc(newRootCategory);
     }
 
@@ -103,11 +103,10 @@ public class CategoryService implements CategoryCRUD {
   }
 
   private void createSubCategory(Category category, Long parentId) {
-    if (loadCategory.doesParentCategoryExist(parentId, category.getName())) {
+    if (loadCategory.doesParentCategoryWithSameNameExist(parentId, category.getName())) {
       throw new SubCategorySameNameAsParentExc(category.getName());
     }
 
-    // Order is important, because parent id might be the same as savedNode
     final Category parentNode = loadCategory.byId(parentId);
     final Category savedNode = writeCategory.upsert(category);
 

@@ -38,6 +38,8 @@ Run the Spring Application from the main class in
 backend/product-main/src/main/java/com/github/almostfamiliar/ConfigApplication.java
 ```
 
+There will be some inital data created by liquibase scripts.
+
 ### How to use the app
 
 The api is documented by swagger at:

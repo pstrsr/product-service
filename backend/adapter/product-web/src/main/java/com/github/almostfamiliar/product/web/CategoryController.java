@@ -49,10 +49,11 @@ public class CategoryController {
   @GetMapping(
       value = "/v1/category/{id}",
       produces = {"application/json"})
+  @ResponseBody
   public CategoryResponse getCategory(
           @Parameter(description="Id of the category",example = "10", required=true)
           @PathVariable @Min(0) Long id) {
-    return categoryWebMapper.toResponse(categoryCRUD.getCategory(id));
+      return categoryWebMapper.toResponse(categoryCRUD.getCategory(id));
   }
 
   @Operation(

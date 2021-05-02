@@ -28,6 +28,7 @@ public class CategoryDao implements LoadCategory, WriteCategory {
     return categoryMapper.toDomain(categoryNode);
   }
 
+
   @Override
   public Set<Category> byIds(List<Long> ids) {
     // We want to check each id individually, if it really exists.
@@ -47,12 +48,12 @@ public class CategoryDao implements LoadCategory, WriteCategory {
   }
 
   @Override
-  public boolean doesParentCategoryExist(Long id, String name) {
+  public boolean doesParentCategoryWithSameNameExist(Long id, String name) {
     return categoryRepository.existsParentByName(id, name);
   }
 
   @Override
-  public boolean doesRootCategoryExist(String name) {
+  public boolean doesRootCategoryExistWithName(String name) {
     return categoryRepository.existsRoot(name);
   }
 
@@ -62,7 +63,7 @@ public class CategoryDao implements LoadCategory, WriteCategory {
   }
 
   @Override
-  public Optional<Category> getParent(Long id) {
+  public Optional<Category> findParent(Long id) {
     final Optional<CategoryNode> categoryNode = categoryRepository.findParent(id);
 
     return categoryNode.map(categoryMapper::toDomain);

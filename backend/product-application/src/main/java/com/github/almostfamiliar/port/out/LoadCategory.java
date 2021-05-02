@@ -13,11 +13,11 @@ public interface LoadCategory {
 
   Set<Category> loadAllRoots();
 
-  boolean doesParentCategoryExist(Long id, String name);
+  boolean doesParentCategoryWithSameNameExist(Long id, String name);
 
-  boolean doesRootCategoryExist(String name);
+  boolean doesRootCategoryExistWithName(String name);
 
   boolean doesAnyIncomingRelationshipExist(Long id);
 
-  Optional<Category> getParent(Long id);
+  Optional<Category> findParent(Long id);
 }

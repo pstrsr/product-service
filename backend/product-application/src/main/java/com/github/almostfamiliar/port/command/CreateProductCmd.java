@@ -17,4 +17,5 @@ public record CreateProductCmd (
          @Currency String currency,
          @NotEmpty List<@Min(0) Long> categories
 ){
+
 }

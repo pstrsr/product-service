@@ -28,6 +28,7 @@
         <liquigraph-spring-boot-starter.version>4.0.2</liquigraph-spring-boot-starter.version>
         <neo4j-jdbc-bolt.version>4.0.1</neo4j-jdbc-bolt.version>
         <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
+        <testcontainers.version>1.15.3</testcontainers.version>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +37,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
                 <version>${spring-boot-starter-parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -26,7 +26,7 @@ import java.util.Set;
 @Transactional
 @Validated
 @RequiredArgsConstructor
-public class ProductService implements ProductCRUD {
+class ProductService implements ProductCRUD {
   private final LoadProduct loadProduct;
   private final LoadCategory loadCategory;
   private final WriteProduct writeProduct;
@@ -49,10 +49,7 @@ public class ProductService implements ProductCRUD {
   @Override
   public Product getProduct(Long id, String currency) {
     final Product product = loadProduct.byId(id);
-    if (!Money.DEFAULT_CURRENCY.equalsIgnoreCase(currency)) {
-      final Money convertedPrice = convertCurrency.convertFromEuro(product.getPrice(), currency);
-      product.convertCurrency(convertedPrice);
-    }
+    convertCurrency(currency, product);
     return product;
   }
 
@@ -69,12 +66,7 @@ public class ProductService implements ProductCRUD {
   @Override
   public Set<Product> getProductsByCategory(Long id, String currency) {
     final Set<Product> products = loadProduct.byCategory(id);
-    if (!Money.DEFAULT_CURRENCY.equalsIgnoreCase(currency)) {
-      for (Product product : products) {
-        final Money convertedPrice = convertCurrency.convertFromEuro(product.getPrice(), currency);
-        product.convertCurrency(convertedPrice);
-      }
-    }
+    convertCurrency(currency, products.toArray(new Product[0]));
     return products;
   }
 
@@ -108,5 +100,14 @@ public class ProductService implements ProductCRUD {
       money = convertCurrency.convertToEuro(money);
     }
     return money;
+  }
+
+  private void convertCurrency(String currency, Product... products) {
+    if (!Money.DEFAULT_CURRENCY.equalsIgnoreCase(currency)) {
+      for (Product product : products) {
+        final Money convertedPrice = convertCurrency.convertFromEuro(product.getPrice(), currency);
+        product.convertCurrency(convertedPrice);
+      }
+    }
   }
 }

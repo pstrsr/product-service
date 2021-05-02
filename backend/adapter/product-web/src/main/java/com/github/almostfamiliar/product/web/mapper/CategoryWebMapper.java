@@ -17,10 +17,6 @@ public interface CategoryWebMapper {
 
   Set<CategoryResponse> toResponse(Set<Category> product);
 
-  default <T> T mapOptional(Optional<T> optional) {
-    return optional.orElse(null);
-  }
-
   /** Mapping with records in other jars is currently bugged. Will be fixed in java 17. */
   default CreateCategoryCmd toCmd(CreateCategoryRequest createCategoryRequest) {
     return new CreateCategoryCmd(
