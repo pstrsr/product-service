@@ -25,9 +25,4 @@ public interface CategoryPersistenceMapper {
 
   CategoryNode toNode(Category category);
 
-  default Set<CategoryNode> unwrapOptional(Optional<Set<Category>> value) {
-    return value
-        .map(children -> children.stream().map(this::toNode).collect(Collectors.toSet()))
-        .orElse(new HashSet<>());
-  }
 }
