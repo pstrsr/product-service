@@ -42,13 +42,6 @@ backend/product-main/src/main/java/com/github/almostfamiliar/ConfigApplication.j
 
 There will be some initial data created by liquibase scripts.
 
-With the following query all the data from the application can be views. (without the liquigraph
-"noise")
-
-```
-MATCH (n:Category) MATCH (p:Product) RETURN n,p
-```
-
 ### How to use the app
 
 The api is documented by swagger at:
@@ -63,11 +56,20 @@ The database can be inspected at:
 http://localhost:7474/
 ```
 
+With the following query all the data from the application can be views. (without the liquigraph
+"noise")
+
+```
+MATCH (n:Category) MATCH (p:Product) RETURN n,p
+```
+
 A Postman collection with some examples is available in:
 
 ```
 /documents/product-service.postman_collection.json
 ```
+
+The frontend did not finish in time.
 
 ## Concept Phase
 
