@@ -1,3 +1,7 @@
 /.idea
 /data
 /plugins
+.idea
+*.iws
+*.iml
+*.ipr
