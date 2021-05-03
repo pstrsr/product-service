@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"sport\",\r\n    \"parentId\": 5\r\n}",
+					"raw": "{\r\n    \"name\": \"women\",\r\n    \"parentId\": 6\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -36,23 +36,11 @@
 		},
 		{
 			"name": "GetCategory",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"women\",\r\n    \"parent\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:8080/v1/category/0",
+					"raw": "http://localhost:8080/v1/category/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -61,7 +49,7 @@
 					"path": [
 						"v1",
 						"category",
-						"0"
+						"4"
 					]
 				}
 			},
@@ -69,21 +57,9 @@
 		},
 		{
 			"name": "GetAllCategories",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"women\",\r\n    \"parent\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "http://localhost:8080/v1/categories",
 					"protocol": "http",
@@ -106,7 +82,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"winter2\"\r\n}",
+					"raw": "{\r\n    \"id\": 7,\r\n    \"name\": \"winter\",\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -143,7 +119,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/category/6",
+					"raw": "http://localhost:8080/v1/category/33",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -152,7 +128,7 @@
 					"path": [
 						"v1",
 						"category",
-						"6"
+						"33"
 					]
 				}
 			},
@@ -165,7 +141,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"glasses\",\r\n    \"description\": \"Big bear onesie. Super warm!\",\r\n    \"price\": 1.50,\r\n    \"categories\": [8]\r\n}",
+					"raw": "{\r\n    \"name\": \"iPad\",\r\n    \"description\": \"Pretty!\",\r\n    \"price\": 1.50,\r\n    \"currency\": \"EUR\",\r\n    \"categories\": [10]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -189,23 +165,11 @@
 		},
 		{
 			"name": "GetProductsByCategory",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"women\",\r\n    \"parent\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:8080/v1/products?categoryId=5",
+					"raw": "http://localhost:8080/v1/products?categoryId=5&currency=USD",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -219,6 +183,10 @@
 						{
 							"key": "categoryId",
 							"value": "5"
+						},
+						{
+							"key": "currency",
+							"value": "USD"
 						}
 					]
 				}
@@ -227,23 +195,11 @@
 		},
 		{
 			"name": "GetProduct",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"women\",\r\n    \"parent\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:8080/v1/product/10?currency=EU",
+					"raw": "http://localhost:8080/v1/product/18?currency=USD",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -252,12 +208,12 @@
 					"path": [
 						"v1",
 						"product",
-						"10"
+						"18"
 					],
 					"query": [
 						{
 							"key": "currency",
-							"value": "EU"
+							"value": "USD"
 						}
 					]
 				}
@@ -271,7 +227,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 14,\r\n    \"name\": \"Pretty nice product bruh\",\r\n    \"description\": \"Pretty fly\",\r\n    \"currency\": \"EUR\",\r\n    \"categories\": [19]\r\n}",
+					"raw": "{\r\n    \"id\": 10,\r\n    \"name\": \"horse\",\r\n    \"description\": \"Pretty fly\",\r\n    \"price\": 1.50,\r\n    \"categories\": [8]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

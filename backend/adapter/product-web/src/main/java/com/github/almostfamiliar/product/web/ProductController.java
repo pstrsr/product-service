@@ -180,7 +180,7 @@ public class ProductController {
             })
     @DeleteMapping(value = "/v1/product/{id}",
           produces = {"application/json"})
-  public void getProduct(
+  public void deleteProduct(
             @Parameter(description="Id of the product",example = "10", required=true) @PathVariable Long id) {
     productCRUD.deleteProduct(id);
   }
