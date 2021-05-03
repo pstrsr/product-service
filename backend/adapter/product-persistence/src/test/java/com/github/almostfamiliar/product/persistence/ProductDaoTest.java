@@ -37,7 +37,7 @@ class ProductDaoTest {
   @Autowired private TestRepository testRepository;
 
   @BeforeEach
-  public void setup()  {
+  public void setup() {
     // creates same test set as Liquibase migration
     testRepository.createTestData1();
     testRepository.createTestData2();

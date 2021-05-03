@@ -2,6 +2,7 @@ package com.github.almostfamiliar.product.persistence.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,14 @@ import java.sql.SQLException;
 @Configuration
 public class PersistenceConfig {
 
+  @Value("${liquigraph.url}")
+  private String jdbcUrl;
+
   /** Needed for Liquigraph migrations */
   @Bean
-  public DataSource dataSource() throws SQLException {
+  public DataSource dataSource() {
     final HikariConfig config = new HikariConfig();
-    config.setJdbcUrl("jdbc:neo4j:http://localhost:7474");
+    config.setJdbcUrl(jdbcUrl);
 
     return new HikariDataSource(config);
   }

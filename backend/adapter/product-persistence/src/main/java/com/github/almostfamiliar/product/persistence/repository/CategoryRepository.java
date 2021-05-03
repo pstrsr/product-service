@@ -27,18 +27,10 @@ public interface CategoryRepository extends CrudRepository<CategoryNode, Long> {
   boolean existsRoot(@Param("name") String name);
 
   @Query("""
-         MATCH (n:Category)
-         WHERE ID(n)=$id
-         MATCH (c:Category)-[:SUBCATEGORY]->(n)
-         RETURN c
-         """)
-  Set<CategoryNode> findAllDirectSubCategories(@Param("id") Long categoryId);
-
-  @Query("""
           MATCH (c:Category)
           WHERE ID(c)=$id
           MATCH (c)-[:SUBCATEGORY*0..]->(cat:Category)
-          WHERE cat.name=$name
+          MATCH (cat {name:$name})
           RETURN count(cat) > 0
           """)
   boolean existsParentByName(@Param("id") Long id, @Param("name") String name);

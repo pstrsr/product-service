@@ -12,6 +12,8 @@ CRUD-API to manage products in categories
 
 ### Build & Run
 
+Set your FIXER_API_KEY environment variable to your fixer.io key.
+
 Build and generate auto generated classes:
 
 ```
@@ -38,7 +40,14 @@ Run the Spring Application from the main class in
 backend/product-main/src/main/java/com/github/almostfamiliar/ConfigApplication.java
 ```
 
-There will be some inital data created by liquibase scripts.
+There will be some initial data created by liquibase scripts.
+
+With the following query all the data from the application can be views. (without the liquigraph
+"noise")
+
+```
+MATCH (n:Category) MATCH (p:Product) RETURN n,p
+```
 
 ### How to use the app
 
@@ -78,7 +87,7 @@ I decided on the following requirements:
 ### Frontend
 
 The frontend will be a single page application implemented in react, as required by the exercise. As
-I have no knowledge of react at allI will struggle with producing high quality software in this
+I have no knowledge of react at all I will struggle with producing high quality software in this
 part. Knowing this I will allocate a significant amount of time into this part to learn the basics (
 probably sunday), but I will focus my efforts on the backend in terms of quality of the software.
 
@@ -154,16 +163,25 @@ An index on this key would make queries by category really fast.
 | Simple  | Does not really work well, if products have to be in multiple categories |
 | Fast queries on products | Queries on the category tree may be slow. This should not be a big problem though, because I would consider this data fairly static and the results can be cached. |
 
-3. Tree in NoSql
+3. Tree with double reference
 
-Modeling a tree in a NoSql Db, with double references to childs and parents. The categories would
-have a list of products in them, to be able to query easily by category. The products themselves
-would have a reference to their categories in them.
+Modeling a tree with double references to children and parents. The categories would have a list of
+products in them, to be able to query easily by category. The products themselves would have a
+reference to their categories in them.
 
 | Pros  | Cons |
 | ------------- | ------------- |
 | Fast queries on both categories and products | Data Redundancy |
 | Easy to adjust the model due to no schema | Complicated to keep the double references in sync |
+
+4. Nested Sets Approach
+
+https://de.wikipedia.org/wiki/Nested_Sets
+
+| Pros  | Cons |
+| ------------- | ------------- |
+| Fast Reads | Slow writes |
+|  | I' not very smart and this seems hard |
 
 => Solution:
 
@@ -172,7 +190,7 @@ I will go with option 1 for the following reasons:
 - That I do not much about it. I want to take this opportunity to learn more about it.
 - I believe this should be the "correct" solution for this problem.
 
-If I run into problems with this approach due to time trouble, I will revert back to option 3.
+If I run into problems with this approach due to time trouble, I will revert to option 3.
 
 ### Additional thoughts
 
@@ -191,3 +209,9 @@ Caching is also used to validate the currencies against the fixer api, to reduce
 - Neo4j
 - Swagger
 - Feign
+- TestContainer
+
+### Notes
+
+The Tests in the persistence layer work when executed in Intellij, but are excluded from the maven
+build as they are extremely slow.
