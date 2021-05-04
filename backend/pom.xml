@@ -95,7 +95,6 @@
         </dependencies>
     </dependencyManagement>
 
-
     <modules>
         <module>product-main</module>
         <module>product-application</module>
