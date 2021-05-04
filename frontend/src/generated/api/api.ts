@@ -806,42 +806,6 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Updates a product
-         * @summary Update product
-         * @param {UpdateProductRequest} updateProductRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getProductsByCategory: async (updateProductRequest: UpdateProductRequest, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'updateProductRequest' is not null or undefined
-            assertParamExists('getProductsByCategory', 'updateProductRequest', updateProductRequest)
-            const localVarPath = `/v1/product`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateProductRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Gets all products and of a category and all products of its subcatgories
          * @summary Get products by category
          * @param {number} categoryId Id of the category
@@ -849,9 +813,9 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProductsByCategory1: async (categoryId: number, currency?: string, options: any = {}): Promise<RequestArgs> => {
+        getProductsByCategory: async (categoryId: number, currency?: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'categoryId' is not null or undefined
-            assertParamExists('getProductsByCategory1', 'categoryId', categoryId)
+            assertParamExists('getProductsByCategory', 'categoryId', categoryId)
             const localVarPath = `/v1/products`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -877,6 +841,42 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates a product
+         * @summary Update product
+         * @param {UpdateProductRequest} updateProductRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateProduct: async (updateProductRequest: UpdateProductRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateProductRequest' is not null or undefined
+            assertParamExists('updateProduct', 'updateProductRequest', updateProductRequest)
+            const localVarPath = `/v1/product`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateProductRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -928,17 +928,6 @@ export const ProductApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Updates a product
-         * @summary Update product
-         * @param {UpdateProductRequest} updateProductRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getProductsByCategory(updateProductRequest: UpdateProductRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProductsByCategory(updateProductRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Gets all products and of a category and all products of its subcatgories
          * @summary Get products by category
          * @param {number} categoryId Id of the category
@@ -946,8 +935,19 @@ export const ProductApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProductsByCategory1(categoryId: number, currency?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Set<ProductResponse>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProductsByCategory1(categoryId, currency, options);
+        async getProductsByCategory(categoryId: number, currency?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Set<ProductResponse>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProductsByCategory(categoryId, currency, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Updates a product
+         * @summary Update product
+         * @param {UpdateProductRequest} updateProductRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateProduct(updateProductRequest: UpdateProductRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateProduct(updateProductRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -992,16 +992,6 @@ export const ProductApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getProduct1(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates a product
-         * @summary Update product
-         * @param {UpdateProductRequest} updateProductRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getProductsByCategory(updateProductRequest: UpdateProductRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.getProductsByCategory(updateProductRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Gets all products and of a category and all products of its subcatgories
          * @summary Get products by category
          * @param {number} categoryId Id of the category
@@ -1009,8 +999,18 @@ export const ProductApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProductsByCategory1(categoryId: number, currency?: string, options?: any): AxiosPromise<Set<ProductResponse>> {
-            return localVarFp.getProductsByCategory1(categoryId, currency, options).then((request) => request(axios, basePath));
+        getProductsByCategory(categoryId: number, currency?: string, options?: any): AxiosPromise<Set<ProductResponse>> {
+            return localVarFp.getProductsByCategory(categoryId, currency, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates a product
+         * @summary Update product
+         * @param {UpdateProductRequest} updateProductRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateProduct(updateProductRequest: UpdateProductRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.updateProduct(updateProductRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1071,32 +1071,32 @@ export interface ProductApiGetProduct1Request {
  */
 export interface ProductApiGetProductsByCategoryRequest {
     /**
-     * 
-     * @type {UpdateProductRequest}
-     * @memberof ProductApiGetProductsByCategory
-     */
-    readonly updateProductRequest: UpdateProductRequest
-}
-
-/**
- * Request parameters for getProductsByCategory1 operation in ProductApi.
- * @export
- * @interface ProductApiGetProductsByCategory1Request
- */
-export interface ProductApiGetProductsByCategory1Request {
-    /**
      * Id of the category
      * @type {number}
-     * @memberof ProductApiGetProductsByCategory1
+     * @memberof ProductApiGetProductsByCategory
      */
     readonly categoryId: number
 
     /**
      * Currency that the products should be returned in.
      * @type {string}
-     * @memberof ProductApiGetProductsByCategory1
+     * @memberof ProductApiGetProductsByCategory
      */
     readonly currency?: string
+}
+
+/**
+ * Request parameters for updateProduct operation in ProductApi.
+ * @export
+ * @interface ProductApiUpdateProductRequest
+ */
+export interface ProductApiUpdateProductRequest {
+    /**
+     * 
+     * @type {UpdateProductRequest}
+     * @memberof ProductApiUpdateProduct
+     */
+    readonly updateProductRequest: UpdateProductRequest
 }
 
 /**
@@ -1143,27 +1143,27 @@ export class ProductApi extends BaseAPI {
     }
 
     /**
-     * Updates a product
-     * @summary Update product
+     * Gets all products and of a category and all products of its subcatgories
+     * @summary Get products by category
      * @param {ProductApiGetProductsByCategoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProductApi
      */
     public getProductsByCategory(requestParameters: ProductApiGetProductsByCategoryRequest, options?: any) {
-        return ProductApiFp(this.configuration).getProductsByCategory(requestParameters.updateProductRequest, options).then((request) => request(this.axios, this.basePath));
+        return ProductApiFp(this.configuration).getProductsByCategory(requestParameters.categoryId, requestParameters.currency, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Gets all products and of a category and all products of its subcatgories
-     * @summary Get products by category
-     * @param {ProductApiGetProductsByCategory1Request} requestParameters Request parameters.
+     * Updates a product
+     * @summary Update product
+     * @param {ProductApiUpdateProductRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProductApi
      */
-    public getProductsByCategory1(requestParameters: ProductApiGetProductsByCategory1Request, options?: any) {
-        return ProductApiFp(this.configuration).getProductsByCategory1(requestParameters.categoryId, requestParameters.currency, options).then((request) => request(this.axios, this.basePath));
+    public updateProduct(requestParameters: ProductApiUpdateProductRequest, options?: any) {
+        return ProductApiFp(this.configuration).updateProduct(requestParameters.updateProductRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

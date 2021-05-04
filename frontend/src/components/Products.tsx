@@ -1,15 +1,30 @@
-import React, {useEffect} from "react";
-import {Configuration, ProductApi} from "../generated/api";
+import React, {useEffect, useState} from "react";
+import {Configuration, ProductApi, ProductResponse} from "../generated/api";
+import Product from "./Product";
 
 const Products = ({selectedCategoryId}: ProductsProps) => {
     useEffect(() => {
-        new ProductApi(new Configuration({}), "http://localhost:8080").getProductsByCategory().then(cats => {
+        if (selectedCategoryId > 0) {
+            new ProductApi(new Configuration({}), "http://localhost:8080")
+                .getProductsByCategory({categoryId: selectedCategoryId})
+                .then(products => {
+                    setProducts(toArray(products.data));
+                }).catch(err => console.log(err));
+        }
+    }, [selectedCategoryId])
 
-        }).catch(err => console.log(err));
-    }, [])
+    function toArray(products?: Set<ProductResponse>) {
+        return Array.from(products || []);
+    }
+
+    const [products, setProducts] = useState(new Array<ProductResponse>());
+
+    const productComponents = products.map((product) =>
+        <Product product={product}/>);
+
     return (
-        <div>
-
+        <div className="product-list">
+            {productComponents}
         </div>
     );
 };
@@ -17,6 +32,5 @@ const Products = ({selectedCategoryId}: ProductsProps) => {
 interface ProductsProps {
     selectedCategoryId: number;
 }
-
 
 export default Products;

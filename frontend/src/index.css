@@ -1,13 +1,86 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    text-align: left;
+}
+
+li:hover {
+    color: green;
+    cursor: pointer;
+}
+
+.green-text {
+    color: green;
+}
+
+.content {
+    display: flex;
+    max-width: 500px;
+    flex-direction: row;
+}
+
+.content > * {
+    margin: 50px;
+}
+
+.product {
+    width: 300px;
+    font-size: 0.8em;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid white;
+}
+
+.product-name {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.product-price {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-right: 10px;
+}
+
+.spacer {
+    width: 5px;
+}
+
+.product-description {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+.white-border {
+    border: 1px solid white;
+    border-radius: 5px;
+    /*padding: 20px;*/
+}
+
+.center {
+    margin: auto;
+    max-width: 500px;
+    padding: 10px;
 }
