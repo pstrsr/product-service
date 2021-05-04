@@ -2,6 +2,10 @@
 
 CRUD-API to manage products in categories
 
+## Note
+
+There is a simple frontend in the "frontend" branch, which is not quite finished.
+
 ## How to run
 
 ### Prerequisites
