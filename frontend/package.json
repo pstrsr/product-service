@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generate": "npx openapi-generator generate -i ../backend/product-main/swagger.json -g typescript-axios -o src/generated/api --additional-properties=useSingleRequestParameter=true"
+    "generate": "npx openapi-generator-cli generate -i ../backend/product-main/swagger.json -g typescript-axios -o src/generated/api --additional-properties=useSingleRequestParameter=true"
   },
   "eslintConfig": {
     "extends": [

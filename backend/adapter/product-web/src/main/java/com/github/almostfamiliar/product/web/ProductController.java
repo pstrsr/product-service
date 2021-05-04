@@ -155,7 +155,7 @@ public class ProductController {
             })
   @PutMapping(value = "/v1/product",
           produces = {"application/json"})
-  public void getProductsByCategory(@RequestBody UpdateProductRequest updateProductRequest) {
+  public void updateProduct(@RequestBody UpdateProductRequest updateProductRequest) {
     productCRUD.updateProduct(productMapper.toCmd(updateProductRequest));
   }
 
