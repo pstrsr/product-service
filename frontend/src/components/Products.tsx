@@ -6,7 +6,7 @@ const Products = ({selectedCategoryId}: ProductsProps) => {
     useEffect(() => {
         if (selectedCategoryId > 0) {
             new ProductApi(new Configuration({}), "http://localhost:8080")
-                .getProductsByCategory({categoryId: selectedCategoryId})
+                .getProductsByCategory({categoryId: selectedCategoryId, currency: "CHF"})
                 .then(products => {
                     setProducts(toArray(products.data));
                 }).catch(err => console.log(err));
