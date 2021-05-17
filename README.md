@@ -2,9 +2,10 @@
 
 CRUD-API to manage products in categories
 
-## Note
+## Challenge
 
-There is a simple frontend in the "frontend" branch, which is not quite finished.
+The challenge is to design a CRUD service for products in categories. 
+Currencies can be converted by calling a 3rd party API. 
 
 ## How to run
 
