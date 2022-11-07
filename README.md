@@ -1,6 +1,6 @@
 # product-service
 
-CRUD-API to manage products in categories with a graph database
+CRUD-API to manage products in categories with a graph database.
 
 ## Challenge
 
